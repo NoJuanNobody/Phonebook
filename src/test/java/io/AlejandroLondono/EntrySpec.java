@@ -12,7 +12,7 @@ public class EntrySpec {
     Name name;
     PhoneNumber number;
 
-    String first, last;
+    String first, last, full;
     int areaCode, exchange, station;
 
 
@@ -23,25 +23,39 @@ public class EntrySpec {
         areaCode = 555;
         exchange = 555;
         station = 5555;
-
+        full = first+" "+last;
         number = new PhoneNumber(areaCode, exchange, station);
         name = new Name(first, last);
+        entry = new Entry(name, number);
 
     }
 
+    @Test
+    public void setNameTest(){
+        Name newName = new Name("Dandy", "Doodle");
+        entry.setName(newName);
+        String actualFullName = entry.getName().getFullName();
+        assertEquals("full name should have been changed", newName.getFullName(), actualFullName);
+    }
+
+    @Test
+    public void setNumberTest(){
+        PhoneNumber newNumber = new PhoneNumber(666,666,7777);
+        entry.setNumber(newNumber);
+        String actualNumber = entry.getNumber().getFullNumber();
+        assertEquals("the number passed should be "+newNumber, newNumber.getFullNumber(),actualNumber);
+    }
 
     @Test
     public void getSetNameTest(){
-        entry = new Entry(name, number);
         String actualName = entry.getName().getFirst();
-        assertEquals("the name saved in entry should be "+first,first, actualName);
+        assertEquals("the name saved in entryOne should be "+first,first, actualName);
         String actualLast = entry.getName().getLastName();
         assertEquals("the last name should have been "+last,last,actualLast);
     }
 
     @Test
     public void getSetNumberTest(){
-        entry = new Entry(name, number);
         int actualAreaCode = entry.getNumber().getAreaCode();
         int actualExchange = entry.getNumber().getExchange();
         int actualStation = entry.getNumber().getStation();
@@ -54,8 +68,6 @@ public class EntrySpec {
 
     @Test
     public void setGetNameTest(){
-        entry = new Entry(name, number);
-        String full = first+" "+last;
         String actualFullName = entry.getName().getFullName();
         assertEquals("first name should be "+full, full, actualFullName);
     }
