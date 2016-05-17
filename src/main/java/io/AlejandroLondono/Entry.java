@@ -1,15 +1,17 @@
 package io.AlejandroLondono;
 
+import java.util.ArrayList;
+
 /**
  * Created by alejandrolondono on 5/16/16.
  */
 public class Entry {
     private Name name;
-    private PhoneNumber number;
+    private ArrayList<PhoneNumber> numbers;
 
     public Entry(Name name, PhoneNumber number){
         this.name = name;
-        this.number = number;
+        this.numbers.add(number);
     }
 
     public Name getName() {
@@ -20,11 +22,11 @@ public class Entry {
         this.name = name;
     }
 
-    public PhoneNumber getNumber() {
-        return number;
+    public ArrayList<PhoneNumber> getNumbers() {
+        return numbers;
     }
 
-    public void setNumber(PhoneNumber number) {
-        this.number = number;
+    public void setNumbers(ArrayList<PhoneNumber> numbers) {
+        this.numbers = numbers;
     }
 }

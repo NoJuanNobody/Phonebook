@@ -41,8 +41,8 @@ public class EntrySpec {
     @Test
     public void setNumberTest(){
         PhoneNumber newNumber = new PhoneNumber(666,666,7777);
-        entry.setNumber(newNumber);
-        String actualNumber = entry.getNumber().getFullNumber();
+        entry.setNumbers(newNumber);
+        String actualNumber = entry.getNumbers().getFullNumber();
         assertEquals("the number passed should be "+newNumber, newNumber.getFullNumber(),actualNumber);
     }
 
@@ -56,9 +56,9 @@ public class EntrySpec {
 
     @Test
     public void getSetNumberTest(){
-        int actualAreaCode = entry.getNumber().getAreaCode();
-        int actualExchange = entry.getNumber().getExchange();
-        int actualStation = entry.getNumber().getStation();
+        int actualAreaCode = entry.getNumbers().getAreaCode();
+        int actualExchange = entry.getNumbers().getExchange();
+        int actualStation = entry.getNumbers().getStation();
         assertEquals("areaCode should be equal", areaCode, actualAreaCode);
         assertEquals("Exchange should be the same", exchange, actualExchange);
         assertEquals("Station should be the same", station, actualStation );

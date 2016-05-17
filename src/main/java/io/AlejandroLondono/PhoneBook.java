@@ -24,9 +24,9 @@ public class PhoneBook {
     public Entry reverseLookup(String number){
         Entry returnEntry = null;
         for(Map.Entry<String, Entry> contact : this.getEntries().entrySet()){
-            boolean condition = contact.getValue().getNumber().getFullNumber().equalsIgnoreCase(number);
-            if(condition) {
-                returnEntry = contact.getValue();
+            for(PhoneNumber theNumber : contact.getValue().getNumbers()){
+               boolean condition = theNumber.getFullNumber().equalsIgnoreCase(number);
+                if(condition) returnEntry = contact.getValue();
             }
         }
         return returnEntry;
