@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class Entry {
     private Name name;
-    private ArrayList<PhoneNumber> numbers;
+    private ArrayList<PhoneNumber> numbers = new ArrayList<>();
 
     public Entry(Name name, PhoneNumber number){
         this.name = name;
@@ -22,11 +22,42 @@ public class Entry {
         this.name = name;
     }
 
-    public ArrayList<PhoneNumber> getNumbers() {
-        return numbers;
+    public PhoneNumber getNumber(int index) {
+        try{
+
+            return this.numbers.get(index);
+        }catch(ArrayIndexOutOfBoundsException e){
+            System.out.println("it seems like there are only "+numbers.size()+" numbers for this contact");
+            return numbers.get(0);
+        }
+    }
+    public ArrayList<PhoneNumber> getNumbers(){
+        return this.numbers;
     }
 
-    public void setNumbers(ArrayList<PhoneNumber> numbers) {
-        this.numbers = numbers;
+    public void setNumber(PhoneNumber number) {
+        this.numbers.add(number);
+    }
+
+    public String listNumbers(){
+        String numString="";
+        for(PhoneNumber number : numbers){
+            numString += number.numType.toString().toLowerCase()+": "+number.getFullNumber()+"\n";
+        }
+        return numString;
+    }
+
+    public int removeNumber(String theNumType){
+        PhoneNumber.Type phoneTypeEnum = PhoneNumber.Type.valueOf(theNumType.toUpperCase());
+        int i = 0;
+        for(PhoneNumber number : numbers){
+            if(number.numType == phoneTypeEnum){
+                break;
+            }
+            i++;
+        }
+        PhoneNumber theNumber =  numbers.get(i);
+        numbers.remove(theNumber);
+        return getNumbers().size();
     }
 }

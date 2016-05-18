@@ -7,6 +7,9 @@ public class PhoneNumber {
     private int areaCode;
     private int exchange;
     private int station;
+    Type numType;
+
+    public enum Type{HOME, WORK, MOBILE}
 
     public String getFullNumber(){
         return "("+this.areaCode+")-"+this.exchange+"-"+this.station;
@@ -28,5 +31,6 @@ public class PhoneNumber {
         this.areaCode = areaCode;
         this.exchange = exchange;
         this.station = station;
+        this.numType = Type.HOME;
     }
 }

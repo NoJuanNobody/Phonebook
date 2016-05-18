@@ -11,7 +11,8 @@ public class EntrySpec {
     Entry entry;
     Name name;
     PhoneNumber number;
-
+    Mobile mobileNumber;
+    WorkPhone workNumber;
     String first, last, full;
     int areaCode, exchange, station;
 
@@ -25,8 +26,11 @@ public class EntrySpec {
         station = 5555;
         full = first+" "+last;
         number = new PhoneNumber(areaCode, exchange, station);
+        workNumber = new WorkPhone(areaCode+100, exchange+55,station+450);
+        mobileNumber = new Mobile(areaCode+400, exchange+34, station);
         name = new Name(first, last);
         entry = new Entry(name, number);
+
 
     }
 
@@ -41,8 +45,8 @@ public class EntrySpec {
     @Test
     public void setNumberTest(){
         PhoneNumber newNumber = new PhoneNumber(666,666,7777);
-        entry.setNumbers(newNumber);
-        String actualNumber = entry.getNumbers().getFullNumber();
+        entry.setNumber(newNumber);
+        String actualNumber = entry.getNumber(1).getFullNumber();
         assertEquals("the number passed should be "+newNumber, newNumber.getFullNumber(),actualNumber);
     }
 
@@ -56,15 +60,31 @@ public class EntrySpec {
 
     @Test
     public void getSetNumberTest(){
-        int actualAreaCode = entry.getNumbers().getAreaCode();
-        int actualExchange = entry.getNumbers().getExchange();
-        int actualStation = entry.getNumbers().getStation();
+        int actualAreaCode = entry.getNumber(0).getAreaCode();
+        int actualExchange = entry.getNumber(0).getExchange();
+        int actualStation = entry.getNumber(0).getStation();
         assertEquals("areaCode should be equal", areaCode, actualAreaCode);
         assertEquals("Exchange should be the same", exchange, actualExchange);
         assertEquals("Station should be the same", station, actualStation );
     }
 
+    @Test
+    public void ListNumberTest(){
+        entry.getNumbers().add(number);
+        String actualNumber = entry.listNumbers();
+        String expectedString = number.numType.toString().toLowerCase()+": "+number.getFullNumber()+"\n"+number.numType.toString().toLowerCase()+": "+number.getFullNumber()+"\n";
+        assertEquals("the string should be equal", expectedString, actualNumber);
+    }
 
+    @Test
+    public void removeNumber(){
+        entry.getNumbers().add(workNumber);
+        entry.getNumbers().add(mobileNumber);
+
+        int statusCode = entry.removeNumber("mobile");
+        int expected = 2;
+        assertEquals("The status code should be 3", expected, statusCode);
+    }
 
     @Test
     public void setGetNameTest(){

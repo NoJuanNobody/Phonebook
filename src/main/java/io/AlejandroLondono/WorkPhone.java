@@ -6,5 +6,6 @@ package io.AlejandroLondono;
 public class WorkPhone extends PhoneNumber{
     public WorkPhone(int areaCode, int exchange, int station){
         super(areaCode, exchange, station);
+        this.numType = Type.WORK;
     }
 }

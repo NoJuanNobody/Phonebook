@@ -6,5 +6,6 @@ package io.AlejandroLondono;
 public class Mobile extends PhoneNumber {
     public Mobile(int areaCode, int exchange, int station) {
         super(areaCode, exchange, station);
+        this.numType = Type.MOBILE;
     }
 }

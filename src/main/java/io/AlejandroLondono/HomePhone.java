@@ -6,5 +6,6 @@ package io.AlejandroLondono;
 public class HomePhone extends PhoneNumber {
     public HomePhone(int areaCode, int exchange, int station){
         super(areaCode, exchange,station);
+
     }
 }
